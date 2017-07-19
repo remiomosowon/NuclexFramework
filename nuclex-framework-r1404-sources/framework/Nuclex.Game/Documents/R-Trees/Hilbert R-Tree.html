@@ -1,0 +1,715 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="generator" content="MediaWiki 1.16alpha-wmf">
+		<meta name="keywords" content="Hilbert R-tree,Cleanup from March 2008,B-tree,Database,Hilbert curve,Minimum bounding rectangle,R* tree,R+ tree,R-tree,R tree,Space-filling curve">
+		<link rel="alternate" type="application/x-wiki" title="Edit this page" href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit">
+		<link rel="edit" title="Edit this page" href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">
+		<link rel="shortcut icon" href="http://en.wikipedia.org/favicon.ico">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://en.wikipedia.org/w/opensearch_desc.php" title="Wikipedia (en)">
+		<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/">
+		<link rel="alternate" type="application/rss+xml" title="Wikipedia RSS Feed" href="http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&amp;feed=rss">
+		<link rel="alternate" type="application/atom+xml" title="Wikipedia Atom Feed" href="http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&amp;feed=atom">
+		<title>Hilbert R-tree - Wikipedia, the free encyclopedia</title>
+		<link rel="stylesheet" href="Hilbert%20R-Tree_files/shared.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="Hilbert%20R-Tree_files/commonPrint.css" type="text/css" media="print">
+		<link rel="stylesheet" href="Hilbert%20R-Tree_files/main.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="Hilbert%20R-Tree_files/main_002.css" type="text/css" media="handheld">
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE50Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE55Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/skins-1.5/monobook/IE60Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/skins-1.5/monobook/IE70Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="Hilbert%20R-Tree_files/index_003.css" type="text/css">
+		<link rel="stylesheet" href="Hilbert%20R-Tree_files/index_005.css" type="text/css" media="print">
+		<link rel="stylesheet" href="Hilbert%20R-Tree_files/index_002.css" type="text/css" media="handheld">
+		<link rel="stylesheet" href="Hilbert%20R-Tree_files/index_004.css" type="text/css">
+		<link rel="stylesheet" href="Hilbert%20R-Tree_files/index.css" type="text/css">
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins-1.5/common/IEFixes.js?233xz"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/skins-1.5";
+		var wgArticlePath = "/wiki/$1";
+		var wgScriptPath = "/w";
+		var wgScript = "/w/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://en.wikipedia.org";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Hilbert_R-tree";
+		var wgTitle = "Hilbert R-tree";
+		var wgAction = "view";
+		var wgArticleId = "12039643";
+		var wgIsArticle = true;
+		var wgUserName = null;
+		var wgUserGroups = null;
+		var wgUserLanguage = "en";
+		var wgContentLanguage = "en";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = 290168238;
+		var wgVersion = "1.16alpha-wmf";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = ["", ""];
+		var wgDigitTransformTable = ["", ""];
+		var wgMainPageTitle = "Main Page";
+		var wgMWSuggestTemplate = "http://en.wikipedia.org/w/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest";
+		var wgDBname = "enwiki";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["with suggestions", "no suggestions"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="Hilbert%20R-Tree_files/wikibits.js"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="Hilbert%20R-Tree_files/ajax.js"></script>
+		<script type="text/javascript" src="Hilbert%20R-Tree_files/mwsuggest.js"></script>
+		<script type="text/javascript">/*<![CDATA[*/
+		var wgNotice='';var wgNoticeLocal='';
+		/*]]>*/</script>
+		<script type="text/javascript" src="Hilbert%20R-Tree_files/centralnotice.js"></script><style type="text/css">
+#centralNotice .siteNoticeSmall{display:none;}
+#centralNotice .siteNoticeSmallAnon{display:none;}
+#centralNotice .siteNoticeSmallUser{display:none;}
+#centralNotice.collapsed .siteNoticeBig{display:none;}
+#centralNotice.collapsed .siteNoticeSmall{display:block;}
+#centralNotice.collapsed .siteNoticeSmallUser{display:block;}
+#centralNotice.collapsed .siteNoticeSmallAnon{display:block;}
+#centralNotice.anonnotice .siteNoticeSmallUser{display:none !important;}
+#centralNotice.usernotice .siteNoticeSmallAnon{display:none !important;}
+</style>
+
+
+		<script type="text/javascript" src="Hilbert%20R-Tree_files/index_002.php"><!-- site js --></script><script type="text/javascript" src="Hilbert%20R-Tree_files/index.php"></script>
+	<style type="text/css">#bodyContent { position:relative; } 
+.topicon { position:absolute; top:-2em !important;}
+#coordinates{ position:absolute; top:1px !important; }</style></head><body class="mediawiki ltr ns-0 ns-subject page-Hilbert_R-tree skin-monobook">
+	<div id="globalWrapper"><div style="position: absolute; z-index: 40; left: 155px; top: 1px; clear: both; float: left; font-size: 90%; font-style: italic; white-space: nowrap;" class="noprint" id="anon-banner"><a href="http://wikimediafoundation.org/wiki/Donate/Now/en?utm_source=enwiki_01&amp;utm_medium=anon_donation_banner&amp;utm_campaign=spontaneous_donation" class="extiw" title="foundation:Fundraising"><b>Make a donation</b></a> to Wikipedia and give the gift of knowledge!</div>
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+		<div id="siteNotice"><script type="text/javascript">if (wgNotice != '') document.writeln(wgNotice);</script><div id="centralNotice" class="expanded anonnotice"><style type="text/css"> 
+/*
+Styles for Notices
+*/
+
+.notice-wrapper-strategy, .notice-collapsed-wrapper-strategy {
+ margin: 2px auto 0;
+ width: 100%;
+ padding: 0;
+ font-family: 'Arial','Helvetica','Tahoma',sans-serif;
+ color: #333;
+ background-color: #ddd;
+ font-size: .9em;
+ font-weight: 200;
+}
+
+.notice-wrapper-strategy
+{
+ border: 1px solid #bbb;
+ background-color: #fcfcfc;
+ text-align: left;
+ font-size: .9em;
+}
+
+.notice-wrapper-strategy a
+{
+ color: #006699;
+}
+
+.trans-box
+{
+ text-align: right;
+ padding: 0;
+ white-space: nowrap;
+}
+
+.toggle-box-strategy
+{
+ text-align: right;
+ padding: 0;
+ white-space: nowrap;
+}
+
+.notice-text-strategy
+{
+ margin: 0 auto;
+ padding: 0 5px 3px 5px;
+ font-size: 1.1em;
+}
+
+.notice-links-strategy
+{
+ text-align:right;
+ padding-right:4px;
+ font-size: .9em;
+}
+
+.line-ht-fix
+{
+ line-height: 1em;
+}
+
+#centralNotice.anonnotice .siteNoticeUser 
+{
+ display:none !important;
+}
+
+#centralNotice.collapsed .siteNoticeUser
+{
+ display:none;
+}
+
+</style>
+
+<table class="siteNoticeUser notice-wrapper-strategy">
+<tbody><tr>
+ <td>
+<div class="notice-text-strategy">
+Where would you like to see Wikimedia in five years? <a href="http://strategy.wikimedia.org/wiki/Call_for_proposals"><b>Submit a proposal!</b></a> (<a href="http://strategy.wikimedia.org/wiki/Main_Page">Learn more.</a>)
+  </div>
+ </td>
+ <td class="line-ht-fix">
+  <div class="notice-links-strategy">
+   <span class="toggle-box-strategy">[<a href="#" onclick="toggleNotice();return
+false">Hide</a>]</span> <span class="trans-box">[<a href="http://strategy.wikimedia.org/wiki/Strategic_Planning:Translation">Help us with translations!</a>]</span>
+  </div>
+ </td>
+</tr>
+</tbody></table></div>
+</div>		<h1 id="firstHeading" class="firstHeading">Hilbert R-tree</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">From Wikipedia, the free encyclopedia</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>			<!-- start content -->
+			<table class="metadata plainlinks ambox ambox-style" style="">
+<tbody><tr>
+<td class="mbox-image">
+<div style="width: 52px;"><a href="http://en.wikipedia.org/wiki/File:Ambox_style.png" class="image" title="Ambox style.png"><img alt="" src="Hilbert%20R-Tree_files/Ambox_style.png" width="40" height="40"></a></div>
+</td>
+<td class="mbox-text" style="">This article <b>may require <a href="http://en.wikipedia.org/wiki/Wikipedia:Cleanup" title="Wikipedia:Cleanup">cleanup</a> to meet Wikipedia's <a href="http://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style" title="Wikipedia:Manual of Style">quality standards</a>.</b> Please <a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit" class="external text" title="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit" rel="nofollow">improve this article</a> if you can. <small><i>(March 2008)</i></small></td>
+</tr>
+</tbody></table>
+<p><b>Hilbert R-tree</b>, an <a href="http://en.wikipedia.org/wiki/R-tree" title="R-tree">R-tree</a>
+variant, is an index for multidimensional objects like lines, regions,
+3-D objects, or high dimensional feature-based parametric objects. It
+can be thought of as an extension to <a href="http://en.wikipedia.org/wiki/B-tree" title="B-tree">B+-tree</a> for multidimensional objects.</p>
+<p>The performance of R-trees depends on the quality of the algorithm
+that clusters the data rectangles on a node. Hilbert R-trees use <a href="http://en.wikipedia.org/wiki/Space-filling_curve" title="Space-filling curve">space-filling curves</a>, and specifically the <a href="http://en.wikipedia.org/wiki/Hilbert_curve" title="Hilbert curve">Hilbert curve</a>, to impose a linear ordering on the data rectangles.</p>
+<p>There are two types of Hilbert R-tree, one for static database and one for dynamic <a href="http://en.wikipedia.org/wiki/Database" title="Database">databases</a>.
+In both cases, space filling curves and specifically the Hilbert curve
+are used to achieve better ordering of multidimensional objects in the
+node. This ordering has to be ‘good’, in the sense that it should group
+‘similar’ data rectangles together, to minimize the area and perimeter
+of the resulting <a href="http://en.wikipedia.org/wiki/Minimum_bounding_rectangle" title="Minimum bounding rectangle">minimum bounding rectangles</a>
+(MBRs). Packed Hilbert R-trees are suitable for static databases in
+which updates are very rare or in which there are no updates at all.</p>
+<p>The dynamic Hilbert R-tree is suitable for dynamic databases where
+insertions, deletions, or updates may occur in real time. Moreover,
+dynamic Hilbert R-trees employ flexible deferred splitting mechanism to
+increase the space utilization. Every node has a well defined set of
+sibling nodes. By adjusting the split policy the Hilbert R-tree can
+achieve a degree of space utilization as high as is desired. This is
+done by proposing an ordering on the R-tree nodes. The Hilbert R-tree
+sorts rectangles according to the <a href="http://en.wikipedia.org/w/index.php?title=Hilbert_value&amp;action=edit&amp;redlink=1" class="new" title="Hilbert value (page does not exist)">Hilbert value</a>
+of the center of the rectangles (i.e., MBR). (The Hilbert value of a
+point is the length of the Hilbert curve from the origin to the point.)
+Given the ordering, every node has a well-defined set of sibling nodes;
+thus, deferred splitting can be used. By adjusting the split policy,
+the Hilbert R-tree can achieve as high utilization as desired. To the
+contrary, other R-tree variants have no control over the space
+utilization.</p>
+<table id="toc" class="toc" summary="Contents">
+<tbody><tr>
+<td>
+<div id="toctitle">
+<h2>Contents</h2>
+ <span class="toctoggle">[<a href="javascript:toggleToc()" class="internal" id="togglelink">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="#The_Basic_Idea"><span class="tocnumber">1</span> <span class="toctext">The Basic Idea</span></a></li>
+<li class="toclevel-1"><a href="#Packed_Hilbert_R-trees"><span class="tocnumber">2</span> <span class="toctext">Packed Hilbert R-trees</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Algorithm_Hilbert-Pack"><span class="tocnumber">2.1</span> <span class="toctext">Algorithm Hilbert-Pack</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Dynamic_Hilbert_R-trees"><span class="tocnumber">3</span> <span class="toctext">Dynamic Hilbert R-trees</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Tree_Structure"><span class="tocnumber">3.1</span> <span class="toctext">Tree Structure</span></a></li>
+<li class="toclevel-2"><a href="#Searching"><span class="tocnumber">3.2</span> <span class="toctext">Searching</span></a></li>
+<li class="toclevel-2"><a href="#Insertion"><span class="tocnumber">3.3</span> <span class="toctext">Insertion</span></a></li>
+<li class="toclevel-2"><a href="#Deletion"><span class="tocnumber">3.4</span> <span class="toctext">Deletion</span></a></li>
+<li class="toclevel-2"><a href="#Overflow_Handling"><span class="tocnumber">3.5</span> <span class="toctext">Overflow Handling</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Notes_and_References"><span class="tocnumber">4</span> <span class="toctext">Notes and References</span></a></li>
+<li class="toclevel-1"><a href="#See_also"><span class="tocnumber">5</span> <span class="toctext">See also</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody></table>
+<script type="text/javascript">
+//<![CDATA[
+ if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } 
+//]]>
+</script>
+<p><a name="The_Basic_Idea" id="The_Basic_Idea"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=1" title="Edit section: The Basic Idea">edit</a>]</span> <span class="mw-headline">The Basic Idea</span></h2>
+<p>Although the following example is for a static environment, it
+explains the intuitive principles for good R-tree design. These
+principles are valid for both static and dynamic databases.
+Roussopoulos and Leifker proposed a method for building a packed R-tree
+that achieves almost 100% space utilization. The idea is to sort the
+data on the x or y coordinate of one of the corners of the rectangles.
+Sorting on any of the four coordinates gives similar results. In this
+discussion points or rectangles are sorted on the x coordinate of the
+lower left corner of the rectangle. In the discussion below the
+Roussopoulos and Leifker’s method is referred to as the lowx packed
+R-tree. The sorted list of rectangles is scanned; successive rectangles
+are assigned to the same R-tree leaf node until that node is full; a
+new leaf node is then created and the scanning of the sorted list
+continues. Thus, the nodes of the resulting R-tree will be fully
+packed, with the possible exception of the last node at each level.
+Thus, the utilization is ≈100%. Higher levels of the tree are created
+in a similar way.</p>
+<p>Figure 1 highlights the problem of the lowx packed R-tree. Figure
+1[Right] shows the leaf nodes of the R-tree that the lowx packing
+method will create for the points of Figure 1 [Left]. The fact that the
+resulting father nodes cover little area explains why the lowx packed
+R-tree achieves excellent performance for point queries. However, the
+fact that the fathers have large perimeters, explains the degradation
+of performance for region queries. This is consistent with the
+analytical formulas for R-tree performance <sup id="cite_ref-IKamel_0-0" class="reference"><a href="#cite_note-IKamel-0"><span>[</span>1<span>]</span></a></sup>.
+Intuitively, the packing algorithm should ideally assign nearby points
+to the same leaf node. Ignorance of the y coordinate by the lowx packed
+R-tree tends to violate this empirical rule.</p>
+<p><a href="http://en.wikipedia.org/wiki/File:Figure1_left.gif" class="image" title="figure1 left"><img alt="figure1 left" src="Hilbert%20R-Tree_files/Figure1_left.gif" width="265" height="243"></a> <a href="http://en.wikipedia.org/wiki/File:Figure1_right.gif" class="image" title="figure1 right"><img alt="figure1 right" src="Hilbert%20R-Tree_files/Figure1_right.gif" width="260" height="242"></a></p>
+<p>Figure 1: [Left] 200 points uniformly distributed; [Right] MBR of nodes generated by the <i>‘lowx packed R-tree’</i> algorithm</p>
+<p>This section describes two variants of the Hilbert R-trees. The
+first index is suitable for the static database in which updates are
+very rare or in which there are no updates at all. The nodes of the
+resulting R-tree will be fully packed, with the possible exception of
+the last node at each level. Thus, the space utilization is ≈100%; this
+structure is called a packed Hilbert R-tree. The second index, called a
+Dynamic Hilbert R-tree, supports insertions and deletions, and is
+suitable for a dynamic environment.</p>
+<p><a name="Packed_Hilbert_R-trees" id="Packed_Hilbert_R-trees"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=2" title="Edit section: Packed Hilbert R-trees">edit</a>]</span> <span class="mw-headline">Packed Hilbert R-trees</span></h2>
+<p>The following provides a brief introduction to the Hilbert curve. The basic Hilbert curve on a 2x2 grid, denoted by H<sub>1</sub>
+is shown in Figure 2. To derive a curve of order i, each vertex of the
+basic curve is replaced by the curve of order i – 1, which may be
+appropriately rotated and/or reflected. Figure 2 also shows the Hilbert
+curves of order two and three. When the order of the curve tends to
+infinity, like other space filling curves, the resulting curve is a
+fractal, with a fractal dimension of two <sup id="cite_ref-HJagadish_1-0" class="reference"><a href="#cite_note-HJagadish-1"><span>[</span>2<span>]</span></a></sup>, <sup id="cite_ref-IKamel_0-1" class="reference"><a href="#cite_note-IKamel-0"><span>[</span>1<span>]</span></a></sup>.
+The Hilbert curve can be generalized for higher dimensionalities.
+Algorithms for drawing the two-dimensional curve of a given order can
+be found in <sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup> and <sup id="cite_ref-HJagadish_1-1" class="reference"><a href="#cite_note-HJagadish-1"><span>[</span>2<span>]</span></a></sup>. An algorithm for higher dimensionalities is given in <sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup>.</p>
+<p>The path of a space filling curve imposes a linear ordering on the
+grid points; this path may be calculated by starting at one end of the
+curve and following the path to the other end. The actual coordinate
+values of each point can be calculated. However, for the Hilbert curve
+this is much harder than for example the Z-order curve. Figure 2 shows
+one such ordering for a 4x4 grid (see curve H<sub>2</sub>). For example, the point (0,0) on the H<sub>2</sub> curve has a Hilbert value of 0, while the point (1,1) has a Hilbert value of 2.</p>
+<p><a href="http://en.wikipedia.org/wiki/File:Figure2_Hilbert.gif" class="image" title="Hilbert curves of order 1, 2, and 3"><img alt="Hilbert curves of order 1, 2, and 3" src="Hilbert%20R-Tree_files/Figure2_Hilbert.gif" width="576" height="260"></a></p>
+<p>Figure 2: Hilbert curves of order 1, 2, and 3</p>
+<p>The Hilbert curve imposes a linear ordering on the data rectangles
+and then traverses the sorted list, assigning each set of C rectangles
+to a node in the R-tree. The final result is that the set of data
+rectangles on the same node will be close to each other in the linear
+ordering, and most likely in the native space; thus, the resulting
+R-tree nodes will have smaller areas. Figure 2 illustrates the
+intuitive reasons why our Hilbert-based methods will result in good
+performance. The data is composed of points (the same points as given
+in Figure 1). By grouping the points according to their Hilbert values,
+the MBRs of the resulting R-tree nodes tend to be small square-like
+rectangles. This indicates that the nodes will likely have small area
+and small perimeters. Small area values result in good performance for
+point queries; small area and small perimeter values lead to good
+performance for larger queries.</p>
+<p><a name="Algorithm_Hilbert-Pack" id="Algorithm_Hilbert-Pack"></a></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=3" title="Edit section: Algorithm Hilbert-Pack">edit</a>]</span> <span class="mw-headline">Algorithm Hilbert-Pack</span></h3>
+<p>(packs rectangles into an R-tree)<br>
+Step 1. Calculate the Hilbert value for each data rectangle<br>
+Step 2. Sort data rectangles on ascending Hilbert values<br>
+Step 3. 	 /* Create leaf nodes (level l-0) */<br></p>
+<ul>
+<li>While (there are more rectangles)
+<ul>
+<li>generate a new R-tree node</li>
+<li>assign the next C rectangles to this node</li>
+</ul>
+</li>
+</ul>
+<p>Step 4. 	 /* Create nodes at higher level (l + 1) */<br></p>
+<ul>
+<li>While (there are &gt; 1 nodes at level l)
+<ul>
+<li>sort nodes at level l ≥ 0 on ascending</li>
+<li>creation time</li>
+<li>repeat Step 3</li>
+</ul>
+</li>
+</ul>
+<p>The assumption here is that the data are static or the frequency of
+modification is low. This is a simple heuristic for constructing an
+R-tree with 100% space utilization which at the same time will have as
+good response time as possible.</p>
+<p><a name="Dynamic_Hilbert_R-trees" id="Dynamic_Hilbert_R-trees"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=4" title="Edit section: Dynamic Hilbert R-trees">edit</a>]</span> <span class="mw-headline">Dynamic Hilbert R-trees</span></h2>
+<p>The performance of R-trees depends on the quality of the algorithm
+that clusters the data rectangles on a node. Hilbert R-trees use
+space-filling curves, and specifically the Hilbert curve, to impose a
+linear ordering on the data rectangles. The Hilbert value of a
+rectangle is defined as the Hilbert value of its center.</p>
+<p><a name="Tree_Structure" id="Tree_Structure"></a></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=5" title="Edit section: Tree Structure">edit</a>]</span> <span class="mw-headline">Tree Structure</span></h3>
+<p>The Hilbert R-tree has the following structure. A leaf node contains at most C<sub>l</sub> entries each of the form (R, obj _id) where C<sub>l</sub> is the capacity of the leaf, R is the MBR of the real object (x<sub>low</sub>, x<sub>high</sub>, y<sub>low</sub>, y<sub>high</sub>) and obj-id is a pointer to the object description record. The main difference between the Hilbert R-tree and the R*-tree <sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup>
+is that non-leaf nodes also contain information about the LHVs (Largest
+Hilbert Value). Thus, a non-leaf node in the Hilbert R-tree contains at
+most C<sub>n</sub> entries of the form (R, ptr, LHV) where C<sub>n</sub>
+is the capacity of a non-leaf node, R is the MBR that encloses all the
+children of that node, ptr is a pointer to the child node, and LHV is
+the largest Hilbert value among the data rectangles enclosed by R.
+Notice that since the non-leaf node picks one of the Hilbert values of
+the children to be the value of its own LHV, there is not extra cost
+for calculating the Hilbert values of the MBR of non-leaf nodes. Figure
+3 illustrates some rectangles organized in a Hilbert R-tree. The
+Hilbert values of the centers are the numbers near the ‘x’ symbols
+(shown only for the parent node ‘II’). The LHV’s are in [brackets].
+Figure 4 shows how the tree of Figure 3 is stored on the disk; the
+contents of the parent node ‘II’ are shown in more detail. Every data
+rectangle in node ‘I’ has a Hilbert value v ≤33; similarly every
+rectangle in node ‘II’ has a Hilbert value greater than 33 and ≤ 107,
+etc.</p>
+<p><a href="http://en.wikipedia.org/wiki/File:Figure3_data_rects.gif" class="image" title="Data rectangles organized in a Hilbert R-tree"><img alt="Data rectangles organized in a Hilbert R-tree" src="Hilbert%20R-Tree_files/Figure3_data_rects.gif" width="576" height="328"></a></p>
+<p>Figure 3: Data rectangles organized in a Hilbert R-tree (Hilbert values and LHV’s are in Brackets)</p>
+<p>A plain R-tree splits a node on overflow, creating two nodes from
+the original one. This policy is called a 1-to-2 splitting policy. It
+is possible also to defer the split, waiting until two nodes split into
+three. Note that this is similar to the B*-tree split policy. This
+method is referred to as the 2-to-3 splitting policy. In general, this
+can be extended to s-to-(s+1) splitting policy; where s is the order of
+the splitting policy. To implement the order-s splitting policy, the
+overflowing node tries to push some of its entries to one of its s - 1
+siblings; if all of them are full, then s-to-(s+1) split need to be
+done. The s -1 siblings are called the cooperating siblings. Next, the
+algorithms for searching, insertion, and overflow handling are
+described in details.</p>
+<p><a name="Searching" id="Searching"></a></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=6" title="Edit section: Searching">edit</a>]</span> <span class="mw-headline">Searching</span></h3>
+<p>The searching algorithm is similar to the one used in other R-tree
+variants. Starting from the root, it descends the tree and examines all
+nodes that intersect the query rectangle. At the leaf level, it reports
+all entries that intersect the query window w as qualified data items.</p>
+<p><b>Algorithm Search(node Root, rect w):</b><br>
+S1. Search nonleaf nodes:<br></p>
+<dl>
+<dd>Invoke Search for every entry whose MBR intersects the query window w.</dd>
+</dl>
+<p>S2. Search leaf nodes:<br></p>
+<dl>
+<dd>Report all entries that intersect the query window w as candidates.</dd>
+</dl>
+<p><a href="http://en.wikipedia.org/wiki/File:Figure4_file_structure.gif" class="image" title="Data rectangles organized in a Hilbert R-tree"><img alt="Data rectangles organized in a Hilbert R-tree" src="Hilbert%20R-Tree_files/Figure4_file_structure.gif" width="576" height="222"></a></p>
+<p><br>
+Figure 4: The file structure for the Hilbert R-tree</p>
+<p><a name="Insertion" id="Insertion"></a></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=7" title="Edit section: Insertion">edit</a>]</span> <span class="mw-headline">Insertion</span></h3>
+<p>To insert a new rectangle r in the Hilbert R-tree, the Hilbert value
+h of the center of the new rectangle is used as a key. At each level
+the node with the minimum LHV of all its siblings is chosen. When a
+leaf node is reached, the rectangle r is inserted in its correct order
+according to h. After a new rectangle is inserted in a leaf node N, <b>AdjustTree</b> is called to fix the MBR and LHV values in the upper-level nodes.</p>
+<p><b>Algorithm Insert(node Root, rect r):</b> /* Inserts a new rectangle r in the Hilbert R-tree. h is the Hilbert value of the rectangle*/<br>
+I1. Find the appropriate leaf node:<br></p>
+<dl>
+<dd>Invoke ChooseLeaf(r, h) to select a leaf node L in which to place r.</dd>
+</dl>
+<p>I2. Insert r in a leaf node L:<br></p>
+<dl>
+<dd>If L has an empty slot, insert r in L in the</dd>
+<dd>appropriate place according to the Hilbert order and return.</dd>
+<dd>If L is full, invoke HandleOverflow(L,r), which</dd>
+<dd>will return new leaf if split was inevitable,</dd>
+</dl>
+<p>I3. Propagate changes upward:</p>
+<dl>
+<dd>Form a set S that contains L, its cooperating siblings</dd>
+<dd>and the new leaf (if any)</dd>
+<dd>Invoke AdjustTree(S).</dd>
+</dl>
+<p>I4. Grow tree taller:</p>
+<dl>
+<dd>If node split propagation caused the root to split, create</dd>
+<dd>a new root whose children are the two resulting nodes.</dd>
+</dl>
+<p><b>Algorithm ChooseLeaf(rect r, int h):</b><br>
+/* Returns the leaf node in which to place a new rectangle r. */<br>
+C1. Initialize:</p>
+<dl>
+<dd>Set N to be the root node.</dd>
+</dl>
+<p>C2. Leaf check:</p>
+<dl>
+<dd>If N is a leaf_ return N.</dd>
+</dl>
+<p>C3. Choose subtree:</p>
+<dl>
+<dd>If N is a non-leaf node, choose the entry (R, ptr, LHV)</dd>
+<dd>with the minimum LHV value greater than h.</dd>
+</dl>
+<p>C4. Descend until a leaf is reached:</p>
+<dl>
+<dd>Set N to the node pointed by ptr and repeat from C2.</dd>
+</dl>
+<p><b>Algorithm AdjustTree(set S):</b><br>
+/* S is a set of nodes that contains the node being updated, its cooperating siblings (if overflow has occurred) and the newly<br>
+created node NN (if split has occurred). The routine ascends from the
+leaf level towards the root, adjusting MBR and LHV of nodes that cover
+the nodes in S. It propagates splits (if any) */<br>
+A1. If root level is reached, stop.<br>
+A2. Propagate node split upward:<br></p>
+<dl>
+<dd>Let Np be the parent node of N.</dd>
+<dd>If N has been split, let NN be the new node.</dd>
+<dd>Insert NN in Np in the correct order according to its Hilbert</dd>
+<dd>value if there is room. Otherwise, invoke HandleOverflow(Np , NN ).</dd>
+<dd>If Np is split, let PP be the new node.</dd>
+</dl>
+<p>A3. Adjust the MBR’s and LHV’s in the parent level:</p>
+<dl>
+<dd>Let P be the set of parent nodes for the nodes in S.</dd>
+<dd>Adjust the corresponding MBR’s and LHV’s of the nodes in P appropriately.</dd>
+</dl>
+<p>A4. Move up to next level:</p>
+<dl>
+<dd>Let S become the set of parent nodes P, with</dd>
+<dd>NN = PP, if Np was split.</dd>
+<dd>repeat from A1.</dd>
+</dl>
+<p><a name="Deletion" id="Deletion"></a></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=8" title="Edit section: Deletion">edit</a>]</span> <span class="mw-headline">Deletion</span></h3>
+<p>In the Hilbert R-tree there is no need to re-insert orphaned nodes
+whenever a father node underflows. Instead, keys can be borrowed from
+the siblings or the underflowing node is merged with its siblings. This
+is possible because the nodes have a clear ordering (according to
+Largest Hilbert Value, LHV); in contrast, in R-trees there is no such
+concept concerning sibling nodes. Notice that deletion operations
+require s cooperating siblings, while insertion operations require s -
+1 siblings.</p>
+<p><b>Algorithm Delete(r):</b><br>
+D1. Find the host leaf:<br></p>
+<dl>
+<dd>Perform an exact match search to find the leaf node L</dd>
+<dd>that contains r.</dd>
+</dl>
+<p>D2. Delete r&nbsp;:<br></p>
+<dl>
+<dd>Remove r from node L.</dd>
+</dl>
+<p>D3. If L underflows<br></p>
+<dl>
+<dd>borrow some entries from s cooperating siblings.</dd>
+<dd>if all the siblings are ready to underflow.</dd>
+<dd>merge s + 1 to s nodes,</dd>
+<dd>adjust the resulting nodes.</dd>
+</dl>
+<p>D4. Adjust MBR and LHV in parent levels.<br></p>
+<dl>
+<dd>form a set S that contains L and its cooperating</dd>
+<dd>siblings (if underflow has occurred).</dd>
+<dd>invoke <b>AdjustTree(S).</b></dd>
+</dl>
+<p><a name="Overflow_Handling" id="Overflow_Handling"></a></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=9" title="Edit section: Overflow Handling">edit</a>]</span> <span class="mw-headline">Overflow Handling</span></h3>
+<p>The overflow handling algorithm in the Hilbert R-tree treats the
+overflowing nodes either by moving some of the entries to one of the s
+- 1 cooperating siblings or by splitting s nodes into s +1 nodes.</p>
+<p><b>Algorithm HandleOverflow(node N, rect r):</b><br>
+/* return the new node if a split occurred. */<br>
+H1. Let ε be a set that contains all the entries from N</p>
+<dl>
+<dd>and its s - 1 cooperating siblings.</dd>
+</dl>
+<p>H2. Add r to ε.<br>
+H3. If at least one of the s - 1 cooperating siblings is not full,</p>
+<dl>
+<dd>distribute ε evenly among the s nodes according to Hilbert values.</dd>
+</dl>
+<p>H4. If all the s cooperating siblings are full,</p>
+<dl>
+<dd>create a new node NN and</dd>
+<dd>distribute ε evenly among the s + 1 nodes according</dd>
+<dd>to Hilbert values</dd>
+<dd>return NN.</dd>
+</dl>
+<p><a name="Notes_and_References" id="Notes_and_References"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=10" title="Edit section: Notes and References">edit</a>]</span> <span class="mw-headline">Notes and References</span></h2>
+<div class="references-small">
+<ol class="references">
+<li id="cite_note-IKamel-0">^ <a href="#cite_ref-IKamel_0-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-IKamel_0-1"><sup><i><b>b</b></i></sup></a>
+I. Kamel and C. Faloutsos, On Packing R-trees, Second International ACM
+Conference on Information and Knowledge Management (CIKM), pages
+490-499, Washington D.C., 1993.</li>
+<li id="cite_note-HJagadish-1">^ <a href="#cite_ref-HJagadish_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-HJagadish_1-1"><sup><i><b>b</b></i></sup></a>
+H. Jagadish. Linear clustering of objects with multiple attributes. In
+Proc. of ACM SIGMOD Conf., pages 332-342, Atlantic City, NJ, May 1990.</li>
+<li id="cite_note-2"><b><a href="#cite_ref-2">^</a></b> J. Griffiths.
+An algorithm for displaying a class of space-filling curves,
+Software-Practice and Experience 16(5), 403-411, May 1986.</li>
+<li id="cite_note-3"><b><a href="#cite_ref-3">^</a></b> T. Bially.
+Space-filling curves. Their generation and their application to
+bandwidth reduction. IEEE Trans. on Information Theory. IT15(6),
+658-664, November 1969.</li>
+<li id="cite_note-4"><b><a href="#cite_ref-4">^</a></b> N. Beckmann, H.
+Kriegel, R. Schneider, and B. Seeger. The R*-tree: an efficient and
+robust access method for points and rectangles. In Proc. of ACM SIGMOD,
+pages 322-331, Atlantic City, NJ, May 1990.</li>
+</ol>
+</div>
+<ul>
+<li>I. Kamel and C. Faloutsos. Parallel R-Trees. In Proc. of ACM SIGMOD
+Conf., pages 195-204 San Diego, CA, June 1992. Also available as Tech.
+Report UMIACS TR 92-1, CS-TR-2820.</li>
+<li>I. Kamel and C. Faloutsos. Hilbert R-tree: An improved R-tree using
+fractals. In Proc. of VLDB Conf., pages 500-509, Santiago, Chile,
+September 1994. Also available as Tech_ Report UMIACS TR 93-12.1
+CS-TR-3032.1.</li>
+<li>N. Koudas, C. Faloutsos and I. Kamel. Declustering Spatial
+Databases on a Multi-Computer Architecture, International Conference on
+Extending Database Technology (EDBT), pages 592-614, 1996.</li>
+<li>N. Roussopoulos and D. Leifker. Direct spatial search on pictorial
+databases using Packed R-trees. In Proc. of ACM SIGMOD, pages 17-31,
+Austin, TX, May 1985.</li>
+<li>M. Schroeder. Fractals, Chaos, Power Laws: Minutes From an Infinite Paradise. W.H. Freeman and Company, NY, 1991.</li>
+<li>T. Sellis, N. Roussopoulos, and C. Faloutsos. The R+-Tree: a
+dynamic index for multi-dimensional objects. In Proc. 13th
+International Conference on VLDB, pages 507-518, England, September
+1987.</li>
+</ul>
+<p><a name="See_also" id="See_also"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit&amp;section=11" title="Edit section: See also">edit</a>]</span> <span class="mw-headline">See also</span></h2>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/R_tree" title="R tree" class="mw-redirect">R tree</a></li>
+<li><a href="http://en.wikipedia.org/wiki/R*_tree" title="R* tree">R* tree</a></li>
+<li><a href="http://en.wikipedia.org/wiki/R%2B_tree" title="R+ tree">R+ tree</a></li>
+</ul>
+
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 319/1000000
+Post-expand include size: 3155/2048000 bytes
+Template argument size: 896/2048000 bytes
+Expensive parser function count: 1/500
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:12039643-0!1!0!default!!en!2 and timestamp 20090807092822 -->
+<div class="printfooter">
+Retrieved from "<a href="http://en.wikipedia.org/wiki/Hilbert_R-tree">http://en.wikipedia.org/wiki/Hilbert_R-tree</a>"</div>
+			<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://en.wikipedia.org/wiki/Special:Categories" title="Special:Categories">Categories</a>: <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:R-tree" title="Category:R-tree">R-tree</a></span></div><div id="mw-hidden-catlinks" class="mw-hidden-cats-hidden">Hidden categories: <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Cleanup_from_March_2008" title="Category:Cleanup from March 2008">Cleanup from March 2008</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:All_pages_needing_cleanup" title="Category:All pages needing cleanup">All pages needing cleanup</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul xml:lang="en" lang="en">
+	
+				 <li id="ca-nstab-main" class="selected"><a href="http://en.wikipedia.org/wiki/Hilbert_R-tree" title="View the content page [alt-c]" accesskey="c">Article</a></li>
+				 <li id="ca-talk"><a href="http://en.wikipedia.org/wiki/Talk:Hilbert_R-tree" title="Discussion about the content page [alt-t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-edit"><a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=edit" title="You can edit this page. 
+Please use the preview button before saving. [alt-e]" accesskey="e">Edit this page</a></li>
+				 <li id="ca-history"><a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;action=history" title="Past versions of this page [alt-h]" accesskey="h">History</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul xml:lang="en" lang="en">
+				<li id="pt-acaibeta"><a href="http://en.wikipedia.org/w/index.php?title=Special:UsabilityInitiativeOptIn&amp;from=Hilbert_R-tree" class="no-text-transform">Try Beta</a></li>
+				<li id="pt-login"><a href="http://en.wikipedia.org/w/index.php?title=Special:UserLogin&amp;returnto=Hilbert_R-tree" title="You are encouraged to log in; however, it is not mandatory. [alt-o]" accesskey="o">Log in / create account</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png);" href="http://en.wikipedia.org/wiki/Main_Page" title="Visit the main page [alt-z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5 xml:lang="en" lang="en">Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage-description"><a href="http://en.wikipedia.org/wiki/Main_Page" title="Visit the main page [alt-z]" accesskey="z">Main page</a></li>
+				<li id="n-contents"><a href="http://en.wikipedia.org/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li>
+				<li id="n-featuredcontent"><a href="http://en.wikipedia.org/wiki/Portal:Featured_content" title="Featured content — the best of Wikipedia">Featured content</a></li>
+				<li id="n-currentevents"><a href="http://en.wikipedia.org/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-randompage"><a href="http://en.wikipedia.org/wiki/Special:Random" title="Load a random article [alt-x]" accesskey="x">Random article</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5 xml:lang="en" lang="en"><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/w/index.php" id="searchform"><div>
+				<input name="title" value="Special:Search" type="hidden">
+				<input autocomplete="off" id="searchInput" name="search" title="Search Wikipedia [alt-f]" accesskey="f" type="text">
+				<input name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if one exists" type="submit">&nbsp;
+				<input name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search Wikipedia for this text" type="submit">
+			</div></form>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-interaction">
+		<h5 xml:lang="en" lang="en">Interaction</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-aboutsite"><a href="http://en.wikipedia.org/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li>
+				<li id="n-portal"><a href="http://en.wikipedia.org/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-recentchanges"><a href="http://en.wikipedia.org/wiki/Special:RecentChanges" title="The list of recent changes in the wiki [alt-r]" accesskey="r">Recent changes</a></li>
+				<li id="n-contact"><a href="http://en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact Wikipedia</a></li>
+				<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Donate/Now/en?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=spontaneous_donation" title="Support us">Donate to Wikipedia</a></li>
+				<li id="n-help"><a href="http://en.wikipedia.org/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5 xml:lang="en" lang="en">Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://en.wikipedia.org/wiki/Special:WhatLinksHere/Hilbert_R-tree" title="List of all English Wikipedia pages containing links to this page [alt-j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="http://en.wikipedia.org/wiki/Special:RecentChangesLinked/Hilbert_R-tree" title="Recent changes in pages linked from this page [alt-k]" accesskey="k">Related changes</a></li>
+<li id="t-upload"><a href="http://en.wikipedia.org/wiki/Wikipedia:Upload" title="Upload files [alt-u]" accesskey="u">Upload file</a></li>
+<li id="t-specialpages"><a href="http://en.wikipedia.org/wiki/Special:SpecialPages" title="List of all special pages [alt-q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;printable=yes" rel="alternate" title="Printable version of this page [alt-p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="http://en.wikipedia.org/w/index.php?title=Hilbert_R-tree&amp;oldid=290168238" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-cite"><a href="http://en.wikipedia.org/w/index.php?title=Special:Cite&amp;page=Hilbert_R-tree&amp;id=290168238">Cite this page</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="Hilbert%20R-Tree_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div>
+				<div id="f-copyrightico"><a href="http://wikimediafoundation.org/"><img src="Hilbert%20R-Tree_files/wikimedia-button.png" alt="Wikimedia Foundation"></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> This page was last modified on 15 May 2009 at 20:54.</li>
+					<li id="copyright">Text is available under the <a href="http://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">Creative Commons Attribution/Share-Alike License</a>;
+additional terms may apply.
+See <a href="http://wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> for details.<br>
+Wikipedia® is a registered trademark of the <a href="http://www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.</li>
+					<li id="privacy"><a href="http://wikimediafoundation.org/wiki/Privacy_policy" class="extiw" title="wikimedia:Privacy policy">Privacy policy</a></li>
+					<li id="about"><a href="http://en.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+					<li id="disclaimer"><a href="http://en.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served by srv203 in 0.048 secs. --></body></html>

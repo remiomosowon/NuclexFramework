@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<project
+  xmlns="http://nant.sf.net/schemas/nant-0.85.win32.net-1.0.xsd"
+  name="Foundation"
+  default="package"
+>
+  <loadtasks assembly="References/tasks/net-2.0/Nuclex.NAnt.Tasks.dll"/>
+  <include buildfile="References/scripts/nant/bundle.include" />
+  <include buildfile="References/scripts/nant/deploy.include" />
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+  <!--
+    Build number, set by TeamCity in automated builds. Manual builds on the
+    command line will by default be tagged as 'product-wip'.
+  -->
+  <tstamp><formatter property="temp" pattern="yyyy-MM-dd" /></tstamp>
+  <property overwrite="false" name="build.number" value="${temp}" />
+
+  <!--
+    Build configuration to compile the project in (usually "Debug" or "Release"),
+    use '-D:build.configuration=Debug' on the command line to change.
+  -->
+  <property overwrite="false" name="build.configuration" value="Release" />
+
+  <!--
+    Platform to build for. Valid platforms are 'net-4.0' 'xna-4.0-xbox360' and 'xna-4.0-phone7'.
+  -->
+  <property overwrite="false" name="build.platform" value="net-4.0" />
+
+  <!-- Path to the nunit executable. -->
+  <property
+    overwrite="false"
+    name="nunit.path"
+    value="References/nunit/net-4.0/"
+  />
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+  <target name="clean" description="Delete all build output files">
+
+    <property name="bundle.platform" value="${build.platform}" />
+    <call target="bundle-clean" />
+
+  </target>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+  <target name="compile" description="Compiles the solution">
+
+    <if test="${property::exists('build.key')}">
+      <copy file="${build.key}" tofile="Foundation.snk" />
+    </if>
+    <if test="${not file::exists('Foundation.snk')}">
+      <fail message="Strong name key (Foundation.snk) not found" />
+    </if>
+
+    <property name="bundle.platform" value="${build.platform}" />
+    <property name="bundle.configuration" value="${build.configuration}" />
+    <property name="bundle.unittest" value="true" />
+
+    <call target="bundle-compile" />
+
+  </target>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+  <!--
+    Runs the unit tests on all output assemblies
+  -->
+  <target name="test" depends="compile" description="Runs the unit tests">
+  
+    <property name="bundle.platform" value="${build.platform}" />
+    <property name="bundle.configuration" value="${build.configuration}" />
+    <property name="bundle.package" value="artifacts" />
+
+    <mkdir dir="artifacts" />
+    <call target="bundle-test" />
+
+  </target>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+  <!--
+    Packages the compiled assemblies for redistribution
+  -->
+  <target name="package" depends="compile" description="Packages the projects for redistribution">
+  
+    <property name="bundle.platform" value="${build.platform}" />
+    <property name="bundle.configuration" value="${build.configuration}" />
+    <property name="bundle.package" value="temp" />
+    
+    <delete dir="${bundle.package}" />
+    <call target="bundle-package" />
+
+    <property name="temp" value="${project::get-name()}-${build.number}-${build.platform}.7z" />
+    <property name="temp" value="${string::to-lower(string::replace(temp, ' ', '-'))}" />
+
+    <mkdir dir="artifacts" />
+    <delete file="artifacts/${temp}" />
+    <sevenzip-compress archive="artifacts/${temp}">
+      <fileset basedir="temp">
+        <include name="**/*" />
+        <exclude name="**/nunit*" />
+        <exclude name="**/nmock*" />
+      </fileset>
+    </sevenzip-compress>
+    
+    <delete dir="${bundle.package}" />
+
+  </target>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+  <target name="deploy" description="Deploys the projects into the release repository">
+  
+    <if test="${not property::exists('deploy.url')}">
+      <fail message="This build is intended for continuous integration servers" />
+    </if>
+
+    <foreach item="File" property="filename">
+        <in><items><include name="artifacts/foundation-*-net-4.0.7z" /></items></in>
+        <do><property name="temp.net4" value="${filename}" /></do>
+    </foreach>
+    <foreach item="File" property="filename">
+        <in><items><include name="artifacts/foundation-*-xna-4.0-phone7.7z" /></items></in>
+        <do><property name="temp.phone7" value="${filename}" /></do>
+    </foreach>
+    <foreach item="File" property="filename">
+        <in><items><include name="artifacts/foundation-*-xna-4.0-xbox360.7z" /></items></in>
+        <do><property name="temp.xbox360" value="${filename}" /></do>
+    </foreach>
+    
+    <delete dir="bin" />
+    <sevenzip-extract archive="${temp.net4}" todir="bin/net-4.0" />
+    <sevenzip-extract archive="${temp.phone7}" todir="bin/xna-4.0-phone7" />
+    <sevenzip-extract archive="${temp.xbox360}" todir="bin/xna-4.0-xbox360" />
+
+    <property
+      name="deploy.commitmessage"
+      value="Automated integration build of '${project::get-name()}'"
+    />
+    <property
+      name="deploy.commitmessage"
+      value="${deploy.commitmessage} release ${build.number}"
+    />
+    <property
+      name="deploy.commitmessage"
+      value="${deploy.commitmessage} on ${environment::get-machine-name()}"
+    />
+    <property name="deploy.directory" value="bin" />
+    <call target="deploy-subversion" />
+
+    <!-- Repackaging -->
+    <property name="temp" value="${project::get-name()}-${build.number}.7z" />
+    <property name="temp" value="${string::to-lower(string::replace(temp, ' ', '-'))}" />
+
+    <delete dir="artifacts" />
+    <mkdir dir="artifacts" />
+    <sevenzip-compress archive="artifacts/${temp}">
+      <fileset basedir="bin">
+        <include name="**/*" />
+      </fileset>
+    </sevenzip-compress>
+
+  </target>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</project>

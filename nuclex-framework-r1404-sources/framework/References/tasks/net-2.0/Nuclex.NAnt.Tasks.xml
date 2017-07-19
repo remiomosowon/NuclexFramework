@@ -1,0 +1,774 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nuclex.NAnt.Tasks</name>
+    </assembly>
+    <members>
+        <member name="T:Nuclex.NAnt.Tasks.FileSetCollection">
+            <summary>
+              Contains a collection of <see cref="T:NAnt.Compression.Types.FileSet" /> elements.
+            </summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.#ctor">
+            <summary>
+              Initializes a new instance of the
+              <see cref="T:NAnt.Compression.Types.FileSetCollection" /> class.
+            </summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.#ctor(Nuclex.NAnt.Tasks.FileSetCollection)">
+            <summary>
+              Initializes a new instance of the
+              <see cref="T:NAnt.Compression.Types.FileSetCollection" /> class
+              with the specified <see cref="T:NAnt.Compression.Types.FileSetCollection" />
+              instance.
+            </summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.#ctor(NAnt.Core.Types.FileSet[])">
+            <summary>
+              Initializes a new instance of the
+              <see cref="T:NAnt.Compression.Types.FileSetCollection" /> class
+              with the specified array of <see cref="T:NAnt.Compression.Types.FileSet" />
+              instances.
+            </summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.Add(NAnt.Core.Types.FileSet)">
+            <summary>
+              Adds a <see cref="T:NAnt.Compression.Types.FileSet" /> to the end of
+              the collection.
+            </summary>
+            <param name="item">
+              The <see cref="T:NAnt.Compression.Types.FileSet" /> to be added to the end of
+              the collection.
+            </param>
+            <returns>The position into which the new element was inserted.</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.AddRange(NAnt.Core.Types.FileSet[])">
+            <summary>
+              Adds the elements of a <see cref="T:NAnt.Compression.Types.FileSet" /> array to
+              the end of the collection.
+            </summary>
+            <param name="items">
+              The array of <see cref="T:NAnt.Compression.Types.FileSet" /> elements to be added
+              to the end of the collection.
+            </param>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.AddRange(Nuclex.NAnt.Tasks.FileSetCollection)">
+            <summary>
+              Adds the elements of a <see cref="T:NAnt.Compression.Types.FileSetCollection" />
+              to the end of the collection.
+            </summary>
+            <param name="items">
+              The <see cref="T:NAnt.Compression.Types.FileSetCollection" /> to be added to
+              the end of the collection.
+            </param>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.Contains(NAnt.Core.Types.FileSet)">
+            <summary>
+              Determines whether a <see cref="T:NAnt.Compression.Types.FileSet" /> is in
+              the collection.
+            </summary>
+            <param name="item">
+              The <see cref="T:NAnt.Compression.Types.FileSet" /> to locate in the collection.
+            </param> 
+            <returns>
+              <see langword="true" /> if <paramref name="item" /> is found in
+              the  collection; otherwise, <see langword="false" />.
+            </returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.CopyTo(NAnt.Core.Types.FileSet[],System.Int32)">
+            <summary>
+              Copies the entire collection to a compatible one-dimensional array, starting at
+              the specified index of the target array.
+            </summary>
+            <param name="array">
+              The one-dimensional array that is the destination of the elements copied from
+              the collection. The array must have zero-based indexing.
+            </param> 
+            <param name="index">
+              The zero-based index in <paramref name="array" /> at which copying begins.
+            </param>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.GetEnumerator">
+            <summary>Returns an enumerator that can iterate through the collection.</summary>
+            <returns>
+              A <see cref="T:NAnt.Compression.Types.FileSetEnumerator" /> for
+              the entire collection.
+            </returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.IndexOf(NAnt.Core.Types.FileSet)">
+            <summary>
+              Retrieves the index of a specified
+              <see cref="T:NAnt.Compression.Types.FileSet" /> object in the collection.
+            </summary>
+            <param name="item">
+              The <see cref="T:NAnt.Compression.Types.FileSet" /> object for which the index
+              is returned.
+            </param> 
+            <returns>
+              The index of the specified <see cref="T:NAnt.Compression.Types.FileSet" />.
+              If the <see cref="T:NAnt.Compression.Types.FileSet" /> is not currently
+              a member of the collection, it returns -1.
+            </returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.Insert(System.Int32,NAnt.Core.Types.FileSet)">
+            <summary>
+              Inserts a <see cref="T:NAnt.Compression.Types.FileSet" /> into the collection at
+              the specified index.
+            </summary>
+            <param name="index">
+              The zero-based index at which <paramref name="item" /> should be inserted.
+            </param>
+            <param name="item">
+              The <see cref="T:NAnt.Compression.Types.FileSet" /> to insert.
+            </param>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetCollection.Remove(NAnt.Core.Types.FileSet)">
+            <summary>Removes a member from the collection.</summary>
+            <param name="item">
+              The <see cref="T:NAnt.Compression.Types.FileSet" /> to remove from the collection.
+            </param>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.FileSetCollection.FileCount">
+            <summary>
+              Get the total number of files that are represented by the filesets in
+              this collection.
+            </summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.FileSetCollection.Item(System.Int32)">
+            <summary>Gets or sets the element at the specified index.</summary>
+            <param name="index">The zero-based index of the element to get or set.</param>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.FileSetEnumerator">
+            <summary>
+            Enumerates the <see cref="T:NAnt.Compression.Types.FileSet" /> elements of a <see cref="T:NAnt.Compression.Types.FileSetCollection" />.
+            </summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetEnumerator.#ctor(Nuclex.NAnt.Tasks.FileSetCollection)">
+            <summary>
+              Initializes a new instance of the
+              <see cref="T:NAnt.Compression.Types.FileSetEnumerator" /> class
+              with the specified <see cref="T:NAnt.Compression.Types.FileSetCollection" />.
+            </summary>
+            <param name="FileSets">The collection that should be enumerated.</param>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetEnumerator.MoveNext">
+            <summary>
+              Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+              <see langword="true" /> if the enumerator was successfully advanced 
+              to the next element; <see langword="false" /> if the enumerator has 
+              passed the end of the collection.
+            </returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.FileSetEnumerator.Reset">
+            <summary>
+              Sets the enumerator to its initial position, which is before the 
+              first element in the collection.
+            </summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.FileSetEnumerator.Current">
+            <summary>Gets the current element in the collection.</summary>
+            <returns>The current element in the collection.</returns>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.Helpers.EnvironmentHelper">
+            <summary>Helper class for environment variables</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.EnvironmentHelper.#cctor">
+            <summary>Initializes the environment helper class</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.EnvironmentHelper.IsWow64Process(System.IntPtr,System.Boolean@)">
+            <summary>
+              Determines whether the specified process is running under WOW64
+            </summary>
+            <param name="processHandle">Handle of the process that will be queried</param>
+            <param name="wow64Process">Receives the result of the query</param>
+            <returns>True if the function has succeeded</returns>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.EnvironmentHelper.RunningOn64BitOS">
+            <summary>
+              Whether the current application is running on a 64 bit operating system
+            </summary>
+            <remarks>
+              Warning: This does make no guarantees as to whether the current process is
+              actually running as a 64 bit process. Unless explicitely flagged, .NET
+              assemblies can run as either, 32 bit or 64 bit code, depending on
+              the architecture of the entry assembly.
+            </remarks>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.EnvironmentHelper.ExecutingAs64BitCode">
+            <summary>
+              Whether the currently executing assembly is running in 64 bit mode
+            </summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.EnvironmentHelper.UsingWoW6432">
+            <summary>
+              Whether the currently executing assembly is running as 32 bit code on
+              a 64 bit operating system
+            </summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.PathHelper">
+            <summary>Utility class for path operations</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.PathHelper.MakeRelative(System.String,System.String)">
+            <summary>Converts an absolute path into a relative one</summary>
+            <param name="basePath">Base directory the new path should be relative to</param>
+            <param name="absolutePath">Absolute path that will be made relative</param>
+            <returns>
+              A path relative to the indicated base directory that matches the
+              absolute path given.
+            </returns>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.Helpers.SevenZipLocator">
+            <summary>Helper class that tries to locate the 7-Zip executable</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SevenZipLocator.Locate">
+            <summary>Tries to locate the 7-Zip executable on the current system</summary>
+            <remarks>
+              You do not need to call this normally. The 'Location' property will
+              automatically initiate a search the first time it is called. Only call
+              this method if you suspect the system might have changed and wish to
+              rescan for the 7-Zip executable.
+            </remarks>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SevenZipLocator.findUsingRegistry">
+            <summary>Tries to locate 7-Zip using its registry path</summary>
+            <returns>The path to the 7-Zip executable or null if not found</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SevenZipLocator.findOnWindows">
+            <summary>Tries to locate 7-Zip in its default path on a windows system</summary>
+            <returns>The path to the 7-Zip executable or null if not found</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SevenZipLocator.searchWindowsProgramFilesFolder(System.String)">
+            <summary>Searches the program files folder for a 7-Zip executable</summary>
+            <returns>The path to the 7-Zip executable or null if not found</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SevenZipLocator.findOnUnix">
+            <summary>Tries to locate 7-Zip in its default path on a unix system</summary>
+            <returns>The path to the 7-Zip executable or null if not found</returns>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.SevenZipLocator.locationAttempted">
+            <summary>Whether we attempted to locate 7-Zip already</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.SevenZipLocator.location">
+            <summary>The location of the 7-Zip executable or null</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.Helpers.SevenZipLocator.Location">
+            <summary>The location of the 7-Zip executable or null if not found</summary>
+            <remarks>
+              Will search for 7-Zip on the system the first time it is called, so it
+              may block for a moment before returning.
+            </remarks>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.SevenZipCompressTask">
+            <summary>Task for compressing files into a 7-Zip archive</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SevenZipCompressTask.#ctor">
+            <summary>Initializes a new 7-Zip task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SevenZipCompressTask.ExecuteTask">
+            <summary>Executes the task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SevenZipCompressTask.createListOfFilesToCompress(NAnt.Core.Types.FileSet)">
+            <summary>Creates a list of the files that need to be compressed</summary>
+            <param name="fileSet">
+              File set whose file names will be written into a temporary text file
+            </param>
+            <returns>The path to a temporary text file containing the list of files</returns>
+            <remarks>
+              The caller is responsible for deleting the returned file again when it
+              is no longer needed.
+            </remarks>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SevenZipCompressTask.archive">
+            <summary>Archive to create or to extract files from</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SevenZipCompressTask.compressionLevel">
+            <summary>Desired compression level</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SevenZipCompressTask.fileSets">
+            <summary>Files that will be compressed</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SevenZipCompressTask.password">
+            <summary>Password the archive will be protected with</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SevenZipCompressTask.Archive">
+            <summary>Archive to create or to extract files from</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SevenZipCompressTask.Password">
+            <summary>Password with which to protect the archive</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SevenZipCompressTask.FileSets">
+            <summary>Files that will be compressed</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SevenZipCompressTask.CompressionLevel">
+            <summary>
+              Desired level of compression. Possible values are 0 (STORE only) 
+              to 9 (highest). The default is 5
+            </summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.SevenZipExtractTask">
+            <summary>Task for extracting files from a 7-Zip archive</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SevenZipExtractTask.#ctor">
+            <summary>Initializes a new 7-Zip extraction task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SevenZipExtractTask.ExecuteTask">
+            <summary>Executes the task</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SevenZipExtractTask.archive">
+            <summary>Archive to create or to extract files from</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SevenZipExtractTask.toDirectory">
+            <summary>Directory to extract to</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SevenZipExtractTask.password">
+            <summary>Password the archive is protected with</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SevenZipExtractTask.Archive">
+            <summary>Archive to create or to extract files from</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SevenZipExtractTask.Password">
+            <summary>Password the archive is protected with</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SevenZipExtractTask.ToDirectory">
+            <summary>Directory into which the 7-Zip archive will be extracted</summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.Subversion">
+            <summary>Invokes the Subversion command line client executable</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Subversion.QuoteArgument(System.String)">
+            <summary>Quotes an argument for the subversion executable</summary>
+            <param name="argument">Argument that will be quoted</param>
+            <returns>The quoted argument</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Subversion.Run(System.String,System.String)">
+            <summary>Runs the Subversion executable</summary>
+            <param name="workingDirectory">Working directory in which to start Subversion</param>
+            <param name="commandLine">Command line arguments to pass to Subversion</param>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.Subversion.ErrorCapturer">
+            <summary>Captures the error message reported by Subversion, if any</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Subversion.ErrorCapturer.SubversionErrorDataReceived(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <summary>Called when Subversion outputs data to the stderr stream</summary>
+            <param name="sender">Process that is outputting data</param>
+            <param name="arguments">Contains the data that was sent to stderr</param>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Subversion.ErrorCapturer.SubversionOutputDataReceived(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <summary>Called when Subversion outputs data to the stderr stream</summary>
+            <param name="sender">Process that is outputting data</param>
+            <param name="arguments">Contains the data that was sent to stderr</param>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Subversion.ErrorCapturer.gotError">
+            <summary>True if an error has occured</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Subversion.ErrorCapturer.errorMessageBuilder">
+            <summary>The suspected error message from Subversion</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.Subversion.ErrorCapturer.ErrorMessage">
+            <summary>The error message if an error has occured</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.Subversion.ErrorCapturer.ErrorOccured">
+            <summary>Whether an error has occured at all</summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.SubversionAddTask">
+            <summary>Adds new files to a working copy</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionAddTask.#ctor">
+            <summary>Initializes a new subversion add task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionAddTask.ExecuteTask">
+            <summary>Executes the task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionAddTask.createListOfFilesToAdd(NAnt.Core.Types.FileSet)">
+            <summary>Creates a list of the files that need to be compressed</summary>
+            <param name="fileSet">
+              File set whose file names will be written into a temporary text file
+            </param>
+            <returns>The path to a temporary text file containing the list of files</returns>
+            <remarks>
+              The caller is responsible for deleting the returned file again when it
+              is no longer needed.
+            </remarks>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionAddTask.fileSets">
+            <summary>Files that will be compressed</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionAddTask.FileSets">
+            <summary>Files that will be compressed</summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.SubversionCheckoutTask">
+            <summary>Checks out a working copy from a subversion repository</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionCheckoutTask.#ctor">
+            <summary>Initializes a new subversion checkout task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionCheckoutTask.ExecuteTask">
+            <summary>Executes the task</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionCheckoutTask.url">
+            <summary>URL of the subversion repository</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionCheckoutTask.toDirectory">
+            <summary>Directory to extract to</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionCheckoutTask.revision">
+            <summary>Revision number, date or name to check out</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionCheckoutTask.userName">
+            <summary>User name by which to log in to the subversion repository</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionCheckoutTask.password">
+            <summary>Password to use for logging in to the subversion repository</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionCheckoutTask.Url">
+            <summary>URL of the subversion repository</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionCheckoutTask.ToDirectory">
+            <summary>Directory into which the working copy will be checked out</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionCheckoutTask.UserName">
+            <summary>Name of the user with which to access the subversion repository</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionCheckoutTask.Password">
+            <summary>Password by which to log in to the subversion repository</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionCheckoutTask.Revision">
+            <summary>Password by which to log in to the subversion repository</summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.Helpers.KnownFolders">
+            <summary>Provides access to the known folders of the operating system</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.KnownFolders.#cctor">
+            <summary>Initializes the KnownFolders class</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.KnownFolders.findProgramFilesPath">
+            <summary>Finds the path to the program files folder</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.KnownFolders.findProgramFiles64Path">
+            <summary>Finds the path of the 64 bit program files folder</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.KnownFolders.findProgramFiles32Path">
+            <summary>Finds the path of the 32 bit program files folder</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.KnownFolders.isPathValid(System.String)">
+            <summary>Checks whether the provided path is valid</summary>
+            <param name="path">Path that will be checked</param>
+            <returns>True if the provided path is valid</returns>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.KnownFolders.ProgramFilesPath">
+            <summary>
+              Path to the program files folder, depending on the architecture of
+              the operating system
+            </summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.KnownFolders.ProgramFiles32Path">
+            <summary>Path to the 32 bit program files folder</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.KnownFolders.ProgramFiles64Path">
+            <summary>Path to the 64 bit program files folder</summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.Helpers.KnownFolders.Vista">
+            <summary>Helper class for working with system paths on windows</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.KnownFolders.Vista.getKnownFolderPath(System.Guid)">
+            <summary>Obtains the path of a system folder on windows</summary>
+            <param name="knownFolderId">
+              ID of the system folder whose path will be obtained
+            </param>
+            <returns>The path to the requested system folder</returns>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.KnownFolders.Vista.programFiles">
+            <summary>
+              "Program Files" folder, depending on the running application's bitness
+            </summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.KnownFolders.Vista.programFilesX64">
+            <summary>
+              "Program Files" folder on x64 systems, undefined on x86 systems
+            </summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.KnownFolders.Vista.programFilesX86">
+            <summary>
+              "Program Files (x86)" folder on x64 systems and "Program Files" folder
+              on x86 systems.
+            </summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.KnownFolders.Vista.SHGetKnownFolderPath(System.Guid,System.UInt32,System.IntPtr,System.IntPtr@)">
+            <summary>
+              Retrieves the full path of a known folder identified by the folder's KNOWNFOLDERID
+            </summary>
+            <param name="folderId">KNOWNFOLDERID that identifies the folder</param>
+            <param name="flags">
+              Retrieval options. This value can be 0; otherwise, one or more of
+              the KNOWN_FOLDER_FLAG values
+            </param>
+            <param name="token">
+              An access token that represents a particular user. If this parameter is NULL,
+              which is the most common usage, the function requests the known folder for
+              the current user
+            </param>
+            <param name="path">
+              When this method returns, contains the address of a pointer to a null-terminated
+              Unicode string that specifies the path of the known folder. The calling process
+              is responsible for freeing this resource once it is no longer needed by
+              calling CoTaskMemFree()
+            </param>
+            <returns>Returns S_OK if successful, or an error value otherwise</returns>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.Helpers.KnownFolders.Vista.ProgramFilesPath">
+            <summary>Path of the program files folder</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.Helpers.KnownFolders.Vista.ProgramFilesPathX86">
+            <summary>
+              Path of the 32 bit program files folder, even in a 64 bit environment
+            </summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.Helpers.KnownFolders.Vista.ProgramFilesPathX64">
+            <summary>
+              Path of the 64 bit program files folder, even in a WOW32 environment
+            </summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.Helpers.OsHelper">
+            <summary>Helper methods for detecting the operating system</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.OsHelper.#cctor">
+            <summary>Initializes the OsHelper</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.OsHelper.IsXpOrLater">
+            <summary>Whether the user is running Windows XP or later</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.OsHelper.IsVistaOrLater">
+            <summary>Whether the user is running Windows Vista or later</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.OsHelper.IsWindows">
+            <summary>Whether the user is running Windows</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.OsHelper.IsUnix">
+            <summary>Whether the user is running Unix</summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.Helpers.SubversionLocator">
+            <summary>Locates the subversion executable on the system</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.Locate">
+            <summary>Tries to locate the Subversion executable on the current system</summary>
+            <remarks>
+              You do not need to call this normally. The 'Location' property will
+              automatically initiate a search the first time it is called. Only call
+              this method if you suspect the system might have changed and wish to
+              rescan for the Subversion executable.
+            </remarks>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.findOnWindows">
+            <summary>Tries to locate subversion using a file search on windows</summary>
+            <returns>The directory the subversion executable can be found in or null</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.searchWindowsProgramFilesFolder(System.String)">
+            <summary>Searches the program files folder for a Subversion executable</summary>
+            <returns>The path to the Subversion executable or null if not found</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.searchWindowsSubversionDistribution(System.String,System.String)">
+            <summary>Searches for an installed Subversion distribution on windows</summary>
+            <param name="programFilesFolder">Path of the program files folder</param>
+            <param name="folderMask">Mark of the directories that will be checked</param>
+            <returns>The directory of the subversion executable, if found</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.findUsingRegistry">
+            <summary>Tries to locate a subversion executable using the registry</summary>
+            <returns>The path to the subversion installation folder or null</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.trySlikSvnFromRegistry">
+            <summary>Tries to locate SlikSvn using its registry path</summary>
+            <returns>The path to the SlikSvn installation folder or null if not found</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.tryCollabNetSvnFromRegistry">
+            <summary>Tries to locate CollabNet Subversion using the registry</summary>
+            <returns>The installation folder of CollabNet Subversion or null</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.tryCollabNetSvnPath(Microsoft.Win32.RegistryKey,System.String)">
+            <summary>Checks one of the specific CollabNet release type keys</summary>
+            <param name="versionKey">Version key under the CollabNet main key</param>
+            <param name="type">
+              Which type of release to check (either "Client" or "Server")
+            </param>
+            <returns>The path to the subversion installation folder or null</returns>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.findOnUnix">
+            <summary>Tries to locate 7-Zip in its default path on a unix system</summary>
+            <returns>The path to the 7-Zip executable or null if not found</returns>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.locationAttempted">
+            <summary>whether we attempted to locate Subversion already</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.location">
+            <summary>The location of the Subversion executable or null</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.Helpers.SubversionLocator.Location">
+            <summary>The location of the Subversion executable or null if not found</summary>
+            <remarks>
+              Will search for Subversion on the system the first time it is called, so it
+              may block for a moment before returning.
+            </remarks>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.SevenZip">
+            <summary>Invokes the 7-Zip file compression utility</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SevenZip.Run(System.String,System.String)">
+            <summary>Runs the 7-Zip executable</summary>
+            <param name="workingDirectory">Working directory in which to start 7-Zip</param>
+            <param name="commandLine">Command line arguments to pass to 7-Zip</param>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.SevenZip.ErrorCapturer">
+            <summary>Captures the error message reported by 7-Zip, if any</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SevenZip.ErrorCapturer.SevenZipErrorDataReceived(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <summary>Called when 7-Zip outputs data to the stderr stream</summary>
+            <param name="sender">Process that is outputting data</param>
+            <param name="arguments">Contains the data that was sent to stderr</param>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SevenZip.ErrorCapturer.SevenZipOutputDataReceived(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <summary>Called when 7-Zip outputs data to the stdout stream</summary>
+            <param name="sender">Process that is outputting data</param>
+            <param name="arguments">Contains the data that was sent to stdout</param>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SevenZip.ErrorCapturer.processLine(System.String)">
+            <summary>Processes a single line from 7-Zip's output</summary>
+            <param name="line">Line the 7-Zip executable has printed</param>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SevenZip.ErrorCapturer.gotError">
+            <summary>True if an error has occured</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SevenZip.ErrorCapturer.errorComplete">
+            <summary>Whether the error message is complete</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SevenZip.ErrorCapturer.errorMessage">
+            <summary>The suspected error message from 7-Zip</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SevenZip.ErrorCapturer.ErrorMessage">
+            <summary>The error message if an error has occured</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SevenZip.ErrorCapturer.ErrorOccured">
+            <summary>Whether an error has occured at all</summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.SubversionCommitTask">
+            <summary>Commits changes to a working copy into a subversion repository</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionCommitTask.#ctor">
+            <summary>Initializes a new subversion commit task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionCommitTask.ExecuteTask">
+            <summary>Executes the task</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionCommitTask.fromDirectory">
+            <summary>Directory to extract to</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionCommitTask.userName">
+            <summary>User name by which to log in to the subversion repository</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionCommitTask.password">
+            <summary>Password to use for logging in to the subversion repository</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionCommitTask.message">
+            <summary>The commit message in which the changes are described</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionCommitTask.FromDirectory">
+            <summary>Directory from which the working copy will be committed</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionCommitTask.Message">
+            <summary>Message describing the changes being committed</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionCommitTask.UserName">
+            <summary>Name of the user with which to access the subversion repository</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionCommitTask.Password">
+            <summary>Password by which to log in to the subversion repository</summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.SubversionDeleteTask">
+            <summary>Deletes files from a working copy</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionDeleteTask.#ctor">
+            <summary>Initializes a new subversion add task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionDeleteTask.ExecuteTask">
+            <summary>Executes the task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionDeleteTask.createListOfFilesToDelete(NAnt.Core.Types.FileSet)">
+            <summary>Creates a list of the files that need to be compressed</summary>
+            <param name="fileSet">
+              File set whose file names will be written into a temporary text file
+            </param>
+            <returns>The path to a temporary text file containing the list of files</returns>
+            <remarks>
+              The caller is responsible for deleting the returned file again when it
+              is no longer needed.
+            </remarks>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionDeleteTask.fileSets">
+            <summary>Files that will be compressed</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionDeleteTask.FileSets">
+            <summary>Files that will be compressed</summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.SubversionExportTask">
+            <summary>Exports a working copy from a subversion repository</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionExportTask.#ctor">
+            <summary>Initializes a new subversion export task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.SubversionExportTask.ExecuteTask">
+            <summary>Executes the task</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionExportTask.url">
+            <summary>URL of the subversion repository</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionExportTask.toDirectory">
+            <summary>Directory to extract to</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionExportTask.revision">
+            <summary>Revision number, date or name to check out</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionExportTask.userName">
+            <summary>User name by which to log in to the subversion repository</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.SubversionExportTask.password">
+            <summary>Password to use for logging in to the subversion repository</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionExportTask.Url">
+            <summary>URL of the subversion repository</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionExportTask.ToDirectory">
+            <summary>Directory into which the working copy will be checked out</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionExportTask.UserName">
+            <summary>Name of the user with which to access the subversion repository</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionExportTask.Password">
+            <summary>Password by which to log in to the subversion repository</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.SubversionExportTask.Revision">
+            <summary>Password by which to log in to the subversion repository</summary>
+        </member>
+        <member name="T:Nuclex.NAnt.Tasks.XmlRemoveTask">
+            <summary>Removes nodes from XML documents</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.XmlRemoveTask.#ctor">
+            <summary>Initializes a new XML node removal task</summary>
+        </member>
+        <member name="M:Nuclex.NAnt.Tasks.XmlRemoveTask.ExecuteTask">
+            <summary>Executes the task</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.XmlRemoveTask.xmlFile">
+            <summary>File to remove nodes from</summary>
+        </member>
+        <member name="F:Nuclex.NAnt.Tasks.XmlRemoveTask.xPath">
+            <summary>XPath for the nodes to be removed</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.XmlRemoveTask.XPath">
+            <summary>XPath of the nodes that will be removed from an XML file</summary>
+        </member>
+        <member name="P:Nuclex.NAnt.Tasks.XmlRemoveTask.File">
+            <summary>XML file from which nodes will be removed</summary>
+        </member>
+    </members>
+</doc>
